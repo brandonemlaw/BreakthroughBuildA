@@ -10,6 +10,6 @@ namespace GameCore
     {
         static void Main(string[] args)
         {
-        }
+        } 
     }
 }
