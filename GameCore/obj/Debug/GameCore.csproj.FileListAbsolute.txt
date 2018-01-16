@@ -1,1 +1,7 @@
-c:\users\softdev.si-203-01\documents\visual studio 2015\Projects\GameCore\GameCore\bin\Debug\GameCore.exe.config
+c:/users/softdev.si-203-01/documents/visual studio 2015/Projects/GameCore/GameCore/bin/Debug/GameCore.exe.config
+/Users/jakeblack_14/GitHub/GameCore/GameCore/bin/Debug/GameCore.exe.config
+/Users/jakeblack_14/GitHub/GameCore/GameCore/bin/Debug/GameCore.exe
+/Users/jakeblack_14/GitHub/GameCore/GameCore/bin/Debug/GameCore.pdb
+/Users/jakeblack_14/GitHub/GameCore/GameCore/obj/Debug/GameCore.csproj.CoreCompileInputs.cache
+/Users/jakeblack_14/GitHub/GameCore/GameCore/obj/Debug/GameCore.exe
+/Users/jakeblack_14/GitHub/GameCore/GameCore/obj/Debug/GameCore.pdb

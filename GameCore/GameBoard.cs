@@ -1,12 +1,16 @@
 ﻿using System;
-System.Collections.Generic.List<>
+
+//System.Collections.Generic.List<int>
+      
+
+
 namespace GameCore
 {
     public class GameBoard
     {
-        public GameBoard()
+        private GameBoard()
         {
-            
+           
         }
     }
 }
