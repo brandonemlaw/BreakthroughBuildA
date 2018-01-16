@@ -6,5 +6,9 @@ namespace GameCore
         public Move()
         {
         }
+
+        private Coordinate Start;
+        private Coordinate End;
+
     }
 }

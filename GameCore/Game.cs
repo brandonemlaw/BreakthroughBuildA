@@ -6,5 +6,9 @@ namespace GameCore
         public Game()
         {
         }
+
+        private Player player1;
+        private Player player2;
+        private bool turn1;
     }
 }
