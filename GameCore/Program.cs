@@ -10,7 +10,8 @@ namespace GameCore
     {
         static void Main(string[] args)
         {
-            
+            GameBoard Game = new GameBoard();
+            Game.initBoard();
         } 
     }
 }

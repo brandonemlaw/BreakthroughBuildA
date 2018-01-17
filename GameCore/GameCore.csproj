@@ -46,7 +46,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameBoard.cs" />
-    <Compile Include="AIPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
