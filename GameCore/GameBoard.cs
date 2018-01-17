@@ -12,6 +12,11 @@ namespace GameCore
         //Creating a Board of Enums 
         private Enum[,] Board = new Enum[ROW, COL];
 
+        public Enum[,] getBoard()
+        {
+            return Board;
+        }
+
         //Initializing a New Gameboard
         public void newGameBoard()
         {
