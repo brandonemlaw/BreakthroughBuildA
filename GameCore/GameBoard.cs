@@ -47,9 +47,9 @@ namespace GameCore
         {
             return false;
         }
-        public Square getPiece(Piece piece)
+        public Square getMove(Move move)
         {
-            return (Square)Board[piece.X-1, piece.Y-1];
+            return (Square)Board[move.Begin.X-1, move.Begin.Y-1];
         }
     }
 
