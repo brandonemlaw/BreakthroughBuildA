@@ -1,20 +1,19 @@
 ﻿using System;
 
-//System.Collections.Generic.List<int>
-
-//All of this class when need revised. 
-//didWin() will certainly need to be changed to reult in true or false. 
-
 
 namespace GameCore
 {
-    enum Sqaure { X, O, S };
+    enum Sqaure { X, O, S }; // Represents Player X Player Y and Spaces
     public class GameBoard
     {
         public const short ROW = 8;
         public const short COL = 8;
+
+        //Creating a Board of Enums 
         private Enum[,] Board = new Enum[ROW, COL];
-        public void initBoard()
+
+        //Initializing a New Gameboard
+        public void newGameBoard()
         {
             for(int i = 0; i < ROW; i++)
             {
@@ -32,9 +31,9 @@ namespace GameCore
                     {
                         Board[i, j] = Sqaure.S;
                     }
-                    Console.Write(Board[i, j]);
+                    Console.Write(Board[i, j]); // Temporary to see what is going on
                 }
-                Console.Write("\n");
+                Console.Write("\n"); // Temporary to see what is going on
             }
         }
     }
