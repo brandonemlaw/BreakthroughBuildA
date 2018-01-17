@@ -10,29 +10,6 @@ namespace GameCore
 {
     public class GameBoard
     {
-        private GameBoard()
-        {
-
-        }
-        public MovePiece()
-        {
-
-        }
-        public validMove()
-        {
-
-        }
-        public getSquare()
-        {
-
-        }
-        public killPiece()
-        {
-
-        }
-        public bool didWin()
-        {
-            return true;
-        }
+       
     }
 }
