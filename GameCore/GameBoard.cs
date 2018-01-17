@@ -36,6 +36,12 @@ namespace GameCore
                 Console.Write("\n"); // Temporary to see what is going on
             }
         }
+
+        //Needs to be changed to actually find out if the game is over
+        public bool gameOver()
+        {
+            return false;
+        }
     }
 
     

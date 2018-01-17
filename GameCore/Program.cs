@@ -16,6 +16,8 @@ namespace GameCore
             PlayerX.setPlayer(identity.X);
             Player PlayerO = new Player();
             PlayerO.setPlayer(identity.O);
+            Player currentPlayer;
+            Move move = new Move();
            
 
             //Find out who goes first
@@ -28,13 +30,32 @@ namespace GameCore
                 if(firstPlayer == 'X')
                 {
                     PlayerX.turn = true;
+                    currentPlayer = PlayerX;
                 }
                 else
                 {
                     PlayerO.turn = true;
+                    currentPlayer = PlayerO;
                 }
             }
             while (PlayerX.turn == false && PlayerO.turn == false);
+
+            while(!Game.gameOver())
+            {
+                do
+                {
+                    Console.Write(currentPlayer.getIdentity(currentPlayer));
+                    Console.Write("What is your move?");
+                    Console.Write("\n");
+                    move.X = (int)Console.ReadKey().KeyChar - 48;
+                    move.Y = (int)Console.ReadKey().KeyChar - 48;
+
+                }
+                while (!currentPlayer.checkMove(move,currentPlayer));
+            }
+
+
+
         } 
     }
 }
