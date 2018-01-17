@@ -8,7 +8,7 @@ namespace GameCore
 {
     public class Move
     {
-        public COORD Begin;
-        public COORD End;
+        public COORD Begin = new COORD();
+        public COORD End = new COORD();
     }
 }

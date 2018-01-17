@@ -26,11 +26,11 @@ namespace GameCore
                 {
                     if (i <= 1)
                     {
-                        Board[i, j] = Square.X;
+                        Board[i, j] = Square.O;
                     }
                     else if (i >= 6)
                     {
-                        Board[i, j] = Square.O;
+                        Board[i, j] = Square.X;
                     }
                     else
                     {
@@ -47,9 +47,9 @@ namespace GameCore
         {
             return false;
         }
-        public Square getMove(Move move)
+        public Square getMove(COORD coord)
         {
-            return (Square)Board[move.Begin.X-1, move.Begin.Y-1];
+            return (Square)Board[coord.X, coord.Y];
         }
     }
 
