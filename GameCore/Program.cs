@@ -73,10 +73,11 @@ namespace GameCore
                     Console.Write(move.Begin.X+1);
                     Console.Write(move.Begin.Y+1);
                     Console.Write("?\n");
-                    move.End.X = (int)Console.ReadKey().KeyChar - 48;
-                    move.End.Y = (int)Console.ReadKey().KeyChar - 48;
+                    move.End.X = (int)Console.ReadKey().KeyChar - 49;
+                    move.End.Y = (int)Console.ReadKey().KeyChar - 49;
                 }
                 while (!checkMove(currentPlayer, Game, move));
+           
             }
 
         }
