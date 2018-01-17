@@ -17,7 +17,7 @@ namespace GameCore
             Player PlayerO = new Player();
             PlayerO.setPlayer(identity.O);
             Player currentPlayer;
-            Move move = new Move();
+            Piece piece = new Piece();
            
 
             //Find out who goes first
@@ -45,17 +45,49 @@ namespace GameCore
                 do
                 {
                     Console.Write(currentPlayer.getIdentity(currentPlayer));
-                    Console.Write("What is your move?");
+                    Console.Write("What Piece do you want to move?");
                     Console.Write("\n");
-                    move.X = (int)Console.ReadKey().KeyChar - 48;
-                    move.Y = (int)Console.ReadKey().KeyChar - 48;
+                    piece.X = (int)Console.ReadKey().KeyChar - 48;
+                    piece.Y = (int)Console.ReadKey().KeyChar - 48;
 
                 }
-                while (!currentPlayer.checkMove(move,currentPlayer));
+                while (!checkPiece(piece,currentPlayer, Game));
             }
 
 
 
-        } 
+        }
+
+        private static bool checkPiece(Piece piece, Player currentPlayer, GameBoard game)
+        {
+            if (currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
+            {
+                if (game.getPiece(piece) != Square.X)
+                {
+
+                    Console.Write("Invalid Piece... Try Again");
+                    return false;
+                    //Greater than thye loaction your on
+                }
+                return true;
+            }
+
+            if(currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
+            {
+                if (game.getPiece(piece) != Square.O)
+                {
+
+                    Console.Write("Invalid Piece... Try Again");
+                    return false;
+                    //Greater than thye loaction your on
+                }
+                return true;
+            }
+            else
+            {
+                Console.Write("Invalid Piece... Try Again");
+                return false;
+            }
+        }
     }
 }

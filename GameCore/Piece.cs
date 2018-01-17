@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameCore
 {
-    class Move
+    public class Piece
     {
        public int X;
        public int Y;

@@ -3,7 +3,7 @@
 
 namespace GameCore
 {
-    enum Sqaure { X, O, S }; // Represents Player X Player Y and Spaces
+    public enum Square { X, O, S }; // Represents Player X Player Y and Spaces
     public class GameBoard
     {
         public const short ROW = 8;
@@ -21,15 +21,15 @@ namespace GameCore
                 {
                     if (i <= 1)
                     {
-                        Board[i, j] = Sqaure.X;
+                        Board[i, j] = Square.X;
                     }
                     else if (i >= 6)
                     {
-                        Board[i, j] = Sqaure.O;
+                        Board[i, j] = Square.O;
                     }
                     else
                     {
-                        Board[i, j] = Sqaure.S;
+                        Board[i, j] = Square.S;
                     }
                     Console.Write(Board[i, j]); // Temporary to see what is going on
                 }
@@ -41,6 +41,10 @@ namespace GameCore
         public bool gameOver()
         {
             return false;
+        }
+        public Square getPiece(Piece piece)
+        {
+            return (Square)Board[piece.X-1, piece.Y-1];
         }
     }
 

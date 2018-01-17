@@ -20,17 +20,7 @@ namespace GameCore
         {
             return (char)currentPlayer.playerIdentity;
         }
-        public bool checkMove(Move move, Player currentPlayer)
-        {
-            if(currentPlayer.playerIdentity == identity.X)
-            {
-                return true;
-            }
-            else
-            {
-                return true;
-            }
-        }
+       
     }
 
   
