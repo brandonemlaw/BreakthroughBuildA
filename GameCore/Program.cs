@@ -69,8 +69,8 @@ namespace GameCore
                 {
                     Console.Write(currentPlayer.getIdentity(currentPlayer));
                     Console.Write("Where do you want to move ");
-                    Console.Write(move.Begin.X+1);
-                    Console.Write(move.Begin.Y+1);
+                    Console.Write(move.Begin.X);
+                    Console.Write(move.Begin.Y);
                     Console.Write("?\n");
                     move.End.X = (int)Console.ReadKey().KeyChar - 48;
                     move.End.Y = (int)Console.ReadKey().KeyChar - 48;
@@ -186,6 +186,10 @@ namespace GameCore
                    )
                 {
                     return true;
+                }
+                else
+                {
+                    return false;
                 }
               
             }
