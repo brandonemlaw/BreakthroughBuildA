@@ -23,10 +23,9 @@ namespace GameCore
             FirstPlayer(PlayerX, PlayerO, ref currentPlayer);
             beginGame(ref currentPlayer, ref Game, ref move);
 
-
-
         }
 
+        //Find out who the first player is going to be
         private static void FirstPlayer(Player PlayerX, Player PlayerO, ref Player currentPlayer)
         {
             //Find out who goes first
@@ -49,7 +48,7 @@ namespace GameCore
             }
             while (PlayerX.turn == false && PlayerO.turn == false);
         }
-
+        //Begin the game
         private static void beginGame(ref Player currentPlayer, ref GameBoard Game,
                                       ref Move move)
         { 
@@ -60,8 +59,8 @@ namespace GameCore
                     Console.Write(currentPlayer.getIdentity(currentPlayer));
                     Console.Write("What COORD do you want to move?");
                     Console.Write("\n");
-                    move.Begin.X = (int)Console.ReadKey().KeyChar - 49;
-                    move.Begin.Y = (int)Console.ReadKey().KeyChar - 49;
+                    move.Begin.X = (int)Console.ReadKey().KeyChar - 48;
+                    move.Begin.Y = (int)Console.ReadKey().KeyChar - 48;
 
                 }
                 while (!checkCOORD(currentPlayer, Game, move));
@@ -73,11 +72,23 @@ namespace GameCore
                     Console.Write(move.Begin.X+1);
                     Console.Write(move.Begin.Y+1);
                     Console.Write("?\n");
-                    move.End.X = (int)Console.ReadKey().KeyChar - 49;
-                    move.End.Y = (int)Console.ReadKey().KeyChar - 49;
+                    move.End.X = (int)Console.ReadKey().KeyChar - 48;
+                    move.End.Y = (int)Console.ReadKey().KeyChar - 48;
                 }
                 while (!checkMove(currentPlayer, Game, move));
-           
+
+                Game.movePiece(move);
+                Game.printGameBoard();
+
+                if(currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
+                {
+                    currentPlayer.setPlayer(identity.O);
+                }
+                else
+
+                {
+                    currentPlayer.setPlayer(identity.X);
+                }
             }
 
         }
@@ -142,23 +153,43 @@ namespace GameCore
                 {
                     return true;
                 }
+                else
+                {
+                    return false;
+                }
               
             }
 
-            return true;
-
             if (currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
             {
-                if (game.getMove(move.End) != Square.O)
+                if (game.getMove(move.End) == Square.O)
                 {
 
-                    Console.Write("Invalid COORD... Try Again");
+                    Console.Write("Invalid move... Try Again");
                     return false;
-                    //Greater than thye loaction your on
+                    //Greater than the loaction your on
                 }
-                return true;
+
+                // Check for Down one
+                if (
+                        move.Begin.X + 1 == move.End.X &&
+                       //Check Left,Center,Right after up one)
+                       (
+                        move.Begin.Y - 1 == move.End.Y ||
+                        move.Begin.Y == move.End.Y ||
+                        move.Begin.Y + 1 == move.End.Y
+                       ) &&
+                       //Check Bounds For X
+                       ((move.End.X <= 7 && move.End.X >= 0) &&
+                       //Check Bounds For Y
+                       (move.End.Y <= 7 && move.End.Y >= 0))
+                   )
+                {
+                    return true;
+                }
+              
             }
-           
+                return false;
         }
     }
 }

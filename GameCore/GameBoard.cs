@@ -42,6 +42,19 @@ namespace GameCore
             }
         }
 
+        public void printGameBoard()
+        {
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    Console.Write(Board[i, j]); // Temporary to see what is going on
+                }
+                Console.Write("\n"); // Temporary to see what is going on
+            }
+        }
+
+
         //Needs to be changed to actually find out if the game is over
         public bool gameOver()
         {
@@ -50,6 +63,11 @@ namespace GameCore
         public Square getMove(COORD coord)
         {
             return (Square)Board[coord.X, coord.Y];
+        }
+        public void movePiece(Move move)
+        {
+            Board[move.End.X, move.End.Y] = Board[move.Begin.X, move.Begin.Y];
+            Board[move.Begin.X, move.Begin.Y] = Square.S;
         }
     }
 
