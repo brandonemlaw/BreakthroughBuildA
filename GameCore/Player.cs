@@ -20,8 +20,5 @@ namespace GameCore
         {
             return (char)currentPlayer.playerIdentity;
         }
-       
     }
-
-  
 }

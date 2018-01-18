@@ -74,6 +74,7 @@ namespace GameCore
                     Console.Write("?\n");
                     move.End.X = (int)Console.ReadKey().KeyChar - 48;
                     move.End.Y = (int)Console.ReadKey().KeyChar - 48;
+                    Console.Write("\n");
                 }
                 while (!checkMove(currentPlayer, Game, move));
 
@@ -96,7 +97,7 @@ namespace GameCore
         {
             if (currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
             {
-                if (game.getMove(move.Begin) != Square.X)
+                if (game.getSquareToken(move.Begin) != Square.X)
                 {
 
                     Console.Write("Invalid COORD... Try Again");
@@ -108,7 +109,7 @@ namespace GameCore
 
             if(currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
             {
-                if (game.getMove(move.Begin) != Square.O)
+                if (game.getSquareToken(move.Begin) != Square.O)
                 {
 
                     Console.Write("Invalid COORD... Try Again");
@@ -128,7 +129,7 @@ namespace GameCore
         {
             if (currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
             {
-                if (game.getMove(move.End) == Square.X)
+                if (game.getSquareToken(move.End) == Square.X)
                 {
 
                     Console.Write("Invalid move... Try Again");
@@ -142,7 +143,7 @@ namespace GameCore
                        //Check Left,Center,Right after up one)
                        (
                         move.Begin.Y - 1 == move.End.Y      || 
-                        move.Begin.Y     == move.End.Y      || 
+                       (move.Begin.Y     == move.End.Y  && game.getSquareToken(move.End) != Square.O )   || 
                         move.Begin.Y + 1 == move.End.Y
                        )                                    &&
                        //Check Bounds For X
@@ -162,7 +163,7 @@ namespace GameCore
 
             if (currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
             {
-                if (game.getMove(move.End) == Square.O)
+                if (game.getSquareToken(move.End) == Square.O)
                 {
 
                     Console.Write("Invalid move... Try Again");
@@ -176,7 +177,7 @@ namespace GameCore
                        //Check Left,Center,Right after up one)
                        (
                         move.Begin.Y - 1 == move.End.Y ||
-                        move.Begin.Y == move.End.Y ||
+                       (move.Begin.Y == move.End.Y && game.getSquareToken(move.End) != Square.X )||
                         move.Begin.Y + 1 == move.End.Y
                        ) &&
                        //Check Bounds For X

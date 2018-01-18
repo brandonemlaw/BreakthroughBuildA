@@ -58,9 +58,30 @@ namespace GameCore
         //Needs to be changed to actually find out if the game is over
         public bool gameOver()
         {
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    if(i == ROW - 1)
+                    {
+                        if ((Square)Board[i, j] == Square.O)
+                        {
+                            return true;
+                        }
+                    }
+                    if(i == 0)
+                    {
+                        if ((Square)Board[i, j] == Square.X)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                 
+            }
             return false;
         }
-        public Square getMove(COORD coord)
+        public Square getSquareToken(COORD coord)
         {
             return (Square)Board[coord.X, coord.Y];
         }
