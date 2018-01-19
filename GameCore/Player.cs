@@ -16,9 +16,9 @@ namespace GameCore
         {
             playerIdentity = iden;
         }
-        public char getIdentity(Player currentPlayer)
+        public char getIdentity()
         {
-            return (char)currentPlayer.playerIdentity;
+            return (char)playerIdentity;
         }
     }
 }

@@ -56,24 +56,24 @@ namespace GameCore
             {
                 do
                 {
-                    Console.Write(currentPlayer.getIdentity(currentPlayer));
+                    Console.Write(currentPlayer.getIdentity());
                     Console.Write("What COORD do you want to move?");
                     Console.Write("\n");
-                    move.Begin.X = (int)Console.ReadKey().KeyChar - 48;
-                    move.Begin.Y = (int)Console.ReadKey().KeyChar - 48;
+                    move.col = Console.ReadKey().KeyChar;
+                    move.row = (int)Console.ReadKey().KeyChar - 48;
+                    move.convertMove(move.Begin);
 
                 }
                 while (!checkCOORD(currentPlayer, Game, move));
 
                 do
                 {
-                    Console.Write(currentPlayer.getIdentity(currentPlayer));
+                    Console.Write(currentPlayer.getIdentity());
                     Console.Write("Where do you want to move ");
-                    Console.Write(move.Begin.X);
-                    Console.Write(move.Begin.Y);
                     Console.Write("?\n");
-                    move.End.X = (int)Console.ReadKey().KeyChar - 48;
-                    move.End.Y = (int)Console.ReadKey().KeyChar - 48;
+                    move.col = Console.ReadKey().KeyChar;
+                    move.row = (int)Console.ReadKey().KeyChar - 48;
+                    move.convertMove(move.End);
                     Console.Write("\n");
                 }
                 while (!checkMove(currentPlayer, Game, move));
@@ -81,7 +81,7 @@ namespace GameCore
                 Game.movePiece(move);
                 Game.printGameBoard();
 
-                if(currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
+                if(currentPlayer.getIdentity() == (char)identity.X)
                 {
                     currentPlayer.setPlayer(identity.O);
                 }
@@ -95,7 +95,7 @@ namespace GameCore
         }
         private static bool checkCOORD(Player currentPlayer, GameBoard game, Move move)
         {
-            if (currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
+            if (currentPlayer.getIdentity() == (char)identity.X)
             {
                 if (game.getSquareToken(move.Begin) != Square.X)
                 {
@@ -107,7 +107,7 @@ namespace GameCore
                 return true;
             }
 
-            if(currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
+            if(currentPlayer.getIdentity() == (char)identity.O)
             {
                 if (game.getSquareToken(move.Begin) != Square.O)
                 {
@@ -127,7 +127,7 @@ namespace GameCore
 
         private static bool checkMove(Player currentPlayer, GameBoard game, Move move)
         {
-            if (currentPlayer.getIdentity(currentPlayer) == (char)identity.X)
+            if (currentPlayer.getIdentity() == (char)identity.X)
             {
                 if (game.getSquareToken(move.End) == Square.X)
                 {
@@ -161,7 +161,7 @@ namespace GameCore
               
             }
 
-            if (currentPlayer.getIdentity(currentPlayer) == (char)identity.O)
+            if (currentPlayer.getIdentity() == (char)identity.O)
             {
                 if (game.getSquareToken(move.End) == Square.O)
                 {
@@ -196,5 +196,6 @@ namespace GameCore
             }
                 return false;
         }
+
     }
 }
