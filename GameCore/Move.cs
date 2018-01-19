@@ -17,8 +17,30 @@ namespace GameCore
 
         public void convertMove(COORD coord)
         {
-            coord.X = col - 58;
-            coord.Y = row - 1;
+            coord.X = 8 - row;
+            coord.Y = col - 65;
+        }
+
+        public void getBeginMove()
+        {
+            Console.Write("\n");
+            Console.Write("What COORD do you want to move?");
+            Console.Write("\n");
+            col = Console.ReadKey().KeyChar;
+            row = (int)Console.ReadKey().KeyChar - 48;
+            Console.Write("\n");
+            convertMove(Begin);
+
+        }
+
+        public void getEndMove()
+        {
+            Console.Write("Where do you want to move");
+            Console.Write("?\n");
+            col = Console.ReadKey().KeyChar;
+            row = (int)Console.ReadKey().KeyChar - 48;
+            convertMove(End);
+            Console.Write("\n");
         }
     }
 

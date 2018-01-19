@@ -36,10 +36,10 @@ namespace GameCore
                     {
                         Board[i, j] = Square.S;
                     }
-                    Console.Write(Board[i, j]); // Temporary to see what is going on
+ 
                 }
-                Console.Write("\n"); // Temporary to see what is going on
             }
+            printGameBoard();
         }
 
         public void printGameBoard()
@@ -48,7 +48,8 @@ namespace GameCore
             {
                 for (int j = 0; j < COL; j++)
                 {
-                    Console.Write(Board[i, j]); // Temporary to see what is going on
+                    Console.Write(Board[i, j]);
+                    Console.Write(" ");// Temporary to see what is going on
                 }
                 Console.Write("\n"); // Temporary to see what is going on
             }

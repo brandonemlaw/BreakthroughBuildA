@@ -56,25 +56,13 @@ namespace GameCore
             {
                 do
                 {
-                    Console.Write(currentPlayer.getIdentity());
-                    Console.Write("What COORD do you want to move?");
-                    Console.Write("\n");
-                    move.col = Console.ReadKey().KeyChar;
-                    move.row = (int)Console.ReadKey().KeyChar - 48;
-                    move.convertMove(move.Begin);
-
+                    move.getBeginMove();
                 }
                 while (!checkCOORD(currentPlayer, Game, move));
 
                 do
                 {
-                    Console.Write(currentPlayer.getIdentity());
-                    Console.Write("Where do you want to move ");
-                    Console.Write("?\n");
-                    move.col = Console.ReadKey().KeyChar;
-                    move.row = (int)Console.ReadKey().KeyChar - 48;
-                    move.convertMove(move.End);
-                    Console.Write("\n");
+                    move.getEndMove();
                 }
                 while (!checkMove(currentPlayer, Game, move));
 
@@ -86,12 +74,10 @@ namespace GameCore
                     currentPlayer.setPlayer(identity.O);
                 }
                 else
-
                 {
                     currentPlayer.setPlayer(identity.X);
                 }
             }
-
         }
         private static bool checkCOORD(Player currentPlayer, GameBoard game, Move move)
         {
