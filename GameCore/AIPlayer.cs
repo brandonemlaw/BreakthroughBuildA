@@ -10,11 +10,11 @@ namespace GameCore
 {
     class AIPlayer : Player
     {
-        private AI.AICore ai = new AI.AICore();
+        //private AI.AICore ai = new AI.AICore();
 
-        public Move getMove()
-        {
-            return ai.getNextMove(Program.getBoard());
-        }
+        //public Move getMove()
+        //{
+        //    //return ai.getNextMove(Program.getBoard());
+        //}
     }
 }

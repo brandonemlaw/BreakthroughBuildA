@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AI;
 
 namespace GameCore
 {
@@ -64,6 +65,7 @@ namespace GameCore
         {
             while (!Game.gameOver())
             {
+                Console.Write("AI Favors at " + global::AI.AICore.evaluate1(true, game.getBoard()) + "\n");
                 Console.Write(currentPlayer.getIdentity() + " to move...\n");
                 move = currentPlayer.getMove();
 

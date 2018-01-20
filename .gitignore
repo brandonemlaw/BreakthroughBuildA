@@ -1,3 +1,8 @@
 
 *.cache
 GameCore/obj/Debug/build.force
+GameCore/obj/Debug/GameCore.exe
+GameCore/obj/Debug/GameCore.pdb
+*.exe
+GameCore/bin/Debug/GameCore.exe.config
+GameCore/bin/Debug/GameCore.pdb

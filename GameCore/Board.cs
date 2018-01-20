@@ -10,12 +10,12 @@ namespace GameCore
     {
         //Private Members
 
-        private int blackCount = 16;
-        private int whiteCount = 16;
-        private bool gameOver = false;
-        private uint[] blackRows = new uint[8];
-        private uint[] whiteRows = new uint[8];
-        private readonly uint[] COLUMNS = new uint[] { 2, 3, 5, 7, 11, 13, 17, 19 };	//A-H
+        public int blackCount = 16;
+        public int whiteCount = 16;
+        public bool gameOver = false;
+        public uint[] blackRows = new uint[8];
+        public uint[] whiteRows = new uint[8];
+        public readonly uint[] COLUMNS = new uint[] { 2, 3, 5, 7, 11, 13, 17, 19 };	//A-H
 
 
         public Board()
