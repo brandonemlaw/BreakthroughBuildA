@@ -23,7 +23,7 @@ namespace AI
 
         private struct cons
         {
-            public const double Penetration = 1;
+            public const double depth = 1;
         }
 
 
@@ -34,9 +34,9 @@ namespace AI
             double result = 0;
 
 
-            //Penetration
-            result += cons.Penetration * EvaluationUtils.evalWPenetration(ref board);
-            result += cons.Penetration * EvaluationUtils.evalBPenetration(ref board);
+            //Depth
+            result += cons.depth * EvaluationUtils.evalWDepth(ref board);
+            result -= cons.depth * EvaluationUtils.evalBDepth(ref board);
 
             
             return result;

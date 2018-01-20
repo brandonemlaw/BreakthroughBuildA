@@ -8,7 +8,7 @@ namespace AI
 {
     class EvaluationUtils
     {
-        public static int evalBPenetration(ref GameCore.Board board)
+        public static int evalBDepth(ref GameCore.Board board)
         {
             int result = 0;
             int i = 1;
@@ -17,21 +17,22 @@ namespace AI
             {
                 if (board.blackRows[i] != 1)
                 {
-                    for (int j = 0; j < 8; j++)
+                    /*for (int j = 0; j < 8; j++)
                     {
                         if (board.blackRows[i] % board.COLUMNS[j] == 0)
                         {
-                            result -= (6 - i);
+                            result += (6 - i);
                         }
                     }
 
-                    end = true;
+                    end = true;*/
+                    return 6 - i;
                 }
                 i++;
             }
             return result;
         }
-        public static int evalWPenetration(ref GameCore.Board board)
+        public static int evalWDepth(ref GameCore.Board board)
         {
             int result = 0;
             int i = 6;
@@ -41,16 +42,18 @@ namespace AI
             {
                 if (board.whiteRows[i] != 1)
                 {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        if (board.whiteRows[i] % board.COLUMNS[j] == 0)
-                        {
-                            result += i - 1;
-                        }
-                    }
-                    end = true;
-                }
-                i--;
+                    /* for (int j = 0; j < 8; j++)
+                     {
+                         if (board.whiteRows[i] % board.COLUMNS[j] == 0)
+                         {
+                             result += i - 1;
+                         }
+                     }
+                     end = true;*/
+                    return i - 1;
+ 
+                 }
+                    i--;
             }
             return result;
         }
