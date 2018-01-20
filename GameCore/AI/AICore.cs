@@ -8,7 +8,7 @@ namespace AI
 {
     public class AICore
     {
-        private board[]
+        //private board[]
 
         public GameCore.Move getNextMove(GameCore.Board board)
         {
@@ -23,9 +23,9 @@ namespace AI
         }
 
 
-        private generatePossibleMoves()
+        /*private generatePossibleMoves()
         {
 
-        }
+        }*/
     }
 }
