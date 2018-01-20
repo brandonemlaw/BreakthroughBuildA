@@ -9,6 +9,7 @@ namespace GameCore
     public class Board
     {
         //Private Members
+
         private int blackCount = 16;
         private int whiteCount = 16;
         private bool gameOver = false;
@@ -34,7 +35,7 @@ namespace GameCore
             }
         }
 
-        public bool makeMove(bool playerWhite, int oldRow, int oldColumn, int row, int column)
+        public bool makeMove(bool playerWhite, int oldRow, int oldColumn, int row, int column, bool dryRun)
         {
             //to do:the array values should be put into temp variable so they dont have to be accessed again
 
@@ -78,17 +79,26 @@ namespace GameCore
 
                 if (blackRows[row] % COLUMNS[column] == 0)
                 {
-                    blackRows[row] /= COLUMNS[column];
-                    blackCount--;
+                    if (!dryRun)
+                    {
+                        blackRows[row] /= COLUMNS[column];
+                        blackCount--;
+                    }
                 }
 
                 if (row == 7 || blackCount == 0)
                 {
-                    gameOver = true;
+                    if (!dryRun)
+                    {
+                        gameOver = true;
+                    }
                 }
 
-                whiteRows[oldRow] /= COLUMNS[oldColumn];
-                whiteRows[row] *= COLUMNS[column];
+                if (!dryRun)
+                {
+                    whiteRows[oldRow] /= COLUMNS[oldColumn];
+                    whiteRows[row] *= COLUMNS[column];
+                }
             }
 
             if (!playerWhite)
@@ -116,17 +126,26 @@ namespace GameCore
                 //if piece of white was taken
                 if (whiteRows[row] % COLUMNS[column] == 0)
                 {
-                    whiteRows[row] /= COLUMNS[column];
-                    whiteCount--;
+                    if (!dryRun)
+                    {
+                        whiteRows[row] /= COLUMNS[column];
+                        whiteCount--;
+                    }
                 }
 
                 if (row == 0 || whiteCount == 0)
                 {
-                    gameOver = true;
+                    if (!dryRun)
+                    {
+                        gameOver = true;
+                    }
                 }
 
-                blackRows[oldRow] /= COLUMNS[oldColumn]; //remove piece at old position
-                blackRows[row] *= COLUMNS[column]; //add piece at new position
+                if (!dryRun)
+                {
+                    blackRows[oldRow] /= COLUMNS[oldColumn]; //remove piece at old position
+                    blackRows[row] *= COLUMNS[column]; //add piece at new position
+                }
             }
 
             return true;
@@ -148,15 +167,15 @@ namespace GameCore
         {
             if (whiteRows[row] % COLUMNS[column] == 0)
             {
-                return Config.XCHAR;
+                return 'W';
             }
             else if (blackRows[row] % COLUMNS[column] == 0)
             {
-                return Config.OCHAR;
+                return 'B';
             }
             else
             {
-                return Config.SCHAR;
+                return 'S';
             }
 
         }

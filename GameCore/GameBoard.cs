@@ -5,93 +5,102 @@ using System.Runtime.InteropServices;
 
 namespace GameCore
 {
-
-
-
-
-    public enum Square { X, O, S }; // Represents Player X Player Y and Spaces
+    
     public class GameBoard
     {
+        //Low Level Board class is used to track the physical board; will increase AI speed
         public Board board;
                 
         public const short ROW = 8;
         public const short COL = 8;
 
-        //Creating a Board of Enums 
-        //private Enum[,] Board = new Enum[ROW, COL];
+        public identity firstPlayer;
 
-        /*public Enum[,] getBoard()
-        {
-            return Board;
-        }*/
 
-        //Returns a copy of the physical board
+        //Returns a copy of the Low Level Board
         public Board getBoard()
         {
             return board;
         }
 
         //Initializing a New Gameboard
-        public void newGameBoard()
+        public void newGameBoard(identity firstPlayer)
         {
             board = new Board();
+            this.firstPlayer = firstPlayer;
             printGameBoard();
         }
 
         public void printGameBoard()
         {
-            for (int i = 0; i < ROW; i++)
+            //Set the second player attribute to have
+            //the opposite identity of the first player
+            identity secondPlayer = identity.O;
+            if (firstPlayer == identity.O)
             {
+                secondPlayer = identity.X;
+            }
+
+            //Display each row (loops backwards for right way up)
+            for (int i = ROW - 1; i >= 0; i--)
+            {
+                //Write the row number
+                Console.Write(i + 1);
+                Console.Write(" ");
+
+                //Display each piece
                 for (int j = 0; j < COL; j++)
                 {
-                    Console.Write(board.getPieceAt(i, j));
-                    //Console.Write(Board[i, j]);
+                    char peice = board.getPieceAt(i, j);
+                    if (peice == 'W')
+                    {
+                        Console.Write(firstPlayer);
+                    }
+                    else if (peice == 'B')
+                    {
+                        Console.Write(secondPlayer);
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+
+
                     Console.Write(" ");// Temporary to see what is going on
                 }
                 Console.Write("\n"); // Temporary to see what is going on
+
             }
+
+            //Display the column ids
+            Console.Write("  A B C D E F G H\n");
         }
 
 
-        //Needs to be changed to actually find out if the game is over
+
+
+        //Returns true if the game is over and false if the game is not
         public bool gameOver()
         {
+            //get the value from the Low Level Board
             return board.isGameOver();
-         /*   for (int i = 0; i < ROW; i++)
-            {
-                for (int j = 0; j < COL; j++)
-                {
-                    if(i == ROW - 1)
-                    {
-                        if ((Square)Board[i, j] == Square.O)
-                        {
-                            return true;
-                        }
-                    }
-                    if(i == 0)
-                    {
-                        if ((Square)Board[i, j] == Square.X)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                 
-            }
-            return false;*/
         }
 
         //Returns the token as a Square object based on the board itself
         public Square getSquareToken(COORD coord)
         {
-            char temp = board.getPieceAt(coord.X, coord.Y);
-            if (temp == Config.XCHAR)
+                        
+            //get the piece value from the board, using its 0-7 reference system
+            char temp = board.getPieceAt(coord.X - 1, coord.Y - 1);
+
+            //Return the square type represented by the value
+            if (temp == 'W')
             {
-                return Square.X;
+                return Square.fromIdentity(firstPlayer);
             }
-            else if (temp == Config.OCHAR)
+            else if (temp == 'B')
             {
-                return Square.O;
+                return Square.fromOppositeIdentity(firstPlayer);
             }
             else
             {
@@ -99,20 +108,35 @@ namespace GameCore
             }
         }
 
-
-        public void movePiece(char id,  Move move)
+        public bool checkMove(identity currentPlayer, Move move)
         {
-            bool isXTurn = false;
-            if (id == Config.XCHAR)
+            bool isFirstsTurn = false;
+            if (firstPlayer == currentPlayer)
             {
-                isXTurn = true;
+                isFirstsTurn = true;
             }
-            board.makeMove(isXTurn, move.Begin.X, move.Begin.Y, move.End.X, move.End.Y);
-            //Board[move.End.X, move.End.Y] = Board[move.Begin.X, move.Begin.Y];
-            //Board[move.Begin.X, move.Begin.Y] = Square.S;
+
+            //Try the move check on the Low Abstraction Board
+            return board.makeMove(isFirstsTurn, move.Begin.X - 1, move.Begin.Y - 1, move.End.X - 1, move.End.Y - 1, false);
         }
+
+
+        public bool movePiece(identity currentPlayer, Move move)
+        {
+            //If the current player is the first player, then white is moving
+            bool isFirstsTurn = false;
+            if (firstPlayer == currentPlayer)
+            {
+                isFirstsTurn = true;
+            }
+
+            //Execute the move on the Low Abstraction Board
+            return board.makeMove(isFirstsTurn, move.Begin.X - 1, move.Begin.Y - 1, move.End.X - 1, move.End.Y - 1, true);
+        }
+
     }
 
-    
 
 }
+
+    

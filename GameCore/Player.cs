@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameCore
 {
-    public enum identity {X,O}
-    class Player
+   
+
+    public class Player
     {
         private identity playerIdentity;
         public bool turn = false;
@@ -16,7 +17,20 @@ namespace GameCore
         {
             playerIdentity = iden;
         }
-        public char getIdentity()
+
+        public identity getIdentity()
+        {
+            return playerIdentity;
+        }
+
+        public Move getMove()
+        {
+            Move result = new GameCore.Move();
+            result.getFromUser(this);
+            return result;
+        }
+
+        /*public char getIdentity()
         {
             if (playerIdentity == identity.X)
             {
@@ -27,6 +41,6 @@ namespace GameCore
                 return Config.OCHAR;
             }
             //return (char)playerIdentity;
-        }
+        }*/
     }
 }

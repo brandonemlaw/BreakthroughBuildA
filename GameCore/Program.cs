@@ -8,54 +8,69 @@ namespace GameCore
 {
     class Program
     {
+        private static GameBoard game;
+
         static void Main(string[] args)
         {
-            GameBoard Game = new GameBoard();
-            Game.newGameBoard();
+            //Define the players
             Player PlayerX = new Player();
             PlayerX.setPlayer(identity.X);
             Player PlayerO = new Player();
             PlayerO.setPlayer(identity.O);
             Player currentPlayer = null;
+
+            //Find out the first player, and set currentPlayer
+            FirstPlayer(PlayerX, PlayerO, ref currentPlayer);
+
+            //Setup the game board
+            game = new GameBoard();
+            game.newGameBoard(currentPlayer.getIdentity());
+
             COORD coord = new COORD();
             Move move = new Move();
 
-            FirstPlayer(PlayerX, PlayerO, ref currentPlayer);
-            beginGame(ref currentPlayer, ref Game, ref move);
+            beginGame(ref currentPlayer, ref game, ref move);
 
         }
 
         //Find out who the first player is going to be
         private static void FirstPlayer(Player PlayerX, Player PlayerO, ref Player currentPlayer)
         {
-            //Player X Always Goes First
-            PlayerX.turn = true;
-            currentPlayer = PlayerX;
-        
+            //Find out who goes first
+            do
+            {
+                Console.Write("Who goes first?");
+                Console.Write("\n");
+                char firstPlayer = Console.ReadKey().KeyChar;
+
+                if (firstPlayer == 'X' || firstPlayer == 'x')
+                {
+                    PlayerX.turn = true;
+                    currentPlayer = PlayerX;
+                }
+                else
+                {
+                    PlayerO.turn = true;
+                    currentPlayer = PlayerO;
+                }
+            }
+            while (PlayerX.turn == false && PlayerO.turn == false);
+
+            Console.Write("\n");
         }
         //Begin the game
         private static void beginGame(ref Player currentPlayer, ref GameBoard Game,
                                       ref Move move)
-        { 
+        {
             while (!Game.gameOver())
             {
-                Console.Write(currentPlayer.getIdentity());
-                do
-                {
-                    move.getBeginMove();
-                }
-                while (!checkCOORD(currentPlayer, Game, move));
-
-                do
-                {
-                    move.getEndMove();
-                }
-                while (!checkMove(currentPlayer, Game, move));
+                Console.Write(currentPlayer.getIdentity() + " to move...\n");
+                move = currentPlayer.getMove();
 
                 Game.movePiece(currentPlayer.getIdentity(), move);
                 Game.printGameBoard();
 
-                if(currentPlayer.getIdentity() == (char)identity.X)
+                if (currentPlayer.getIdentity() == identity.X)
                 {
                     currentPlayer.setPlayer(identity.O);
                 }
@@ -64,10 +79,13 @@ namespace GameCore
                     currentPlayer.setPlayer(identity.X);
                 }
             }
+
+
         }
-        private static bool checkCOORD(Player currentPlayer, GameBoard game, Move move)
+
+        public static bool checkCOORD(Player currentPlayer, Move move)
         {
-            if (currentPlayer.getIdentity() == Config.XCHAR)
+            if (currentPlayer.getIdentity() == identity.X)
             {
                 if (game.getSquareToken(move.Begin) != Square.X)
                 {
@@ -79,7 +97,7 @@ namespace GameCore
                 return true;
             }
 
-            if(currentPlayer.getIdentity() == Config.OCHAR)
+            if (currentPlayer.getIdentity() == identity.O)
             {
                 if (game.getSquareToken(move.Begin) != Square.O)
                 {
@@ -97,77 +115,10 @@ namespace GameCore
             }
         }
 
-        private static bool checkMove(Player currentPlayer, GameBoard game, Move move)
+        public static bool checkMove(Player currentPlayer, Move move)
         {
-            if (currentPlayer.getIdentity() == Config.XCHAR)
-            {
-                if (game.getSquareToken(move.End) == Square.X)
-                {
-
-                    Console.Write("Invalid move... Try Again");
-                    return false;
-                    //Greater than the loaction your on
-                }
-
-                // Check for Up one
-                if (
-                        move.Begin.X - 1 == move.End.X &&
-                       //Check Left,Center,Right after up one)
-                       (
-                        move.Begin.Y - 1 == move.End.Y      || 
-                       (move.Begin.Y     == move.End.Y  && game.getSquareToken(move.End) != Square.O )   || 
-                        move.Begin.Y + 1 == move.End.Y
-                       )                                    &&
-                       //Check Bounds For X
-                       ((move.End.X <= 7 && move.End.X >= 0) &&
-                       //Check Bounds For Y
-                       (move.End.Y <= 7 && move.End.Y >= 0))
-                   )
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-              
-            }
-
-            if (currentPlayer.getIdentity() == Config.OCHAR)
-            {
-                if (game.getSquareToken(move.End) == Square.O)
-                {
-
-                    Console.Write("Invalid move... Try Again");
-                    return false;
-                    //Greater than the loaction your on
-                }
-
-                // Check for Down one
-                if (
-                        move.Begin.X + 1 == move.End.X &&
-                       //Check Left,Center,Right after up one)
-                       (
-                        move.Begin.Y - 1 == move.End.Y ||
-                       (move.Begin.Y == move.End.Y && game.getSquareToken(move.End) != Square.X )||
-                        move.Begin.Y + 1 == move.End.Y
-                       ) &&
-                       //Check Bounds For X
-                       ((move.End.X <= 7 && move.End.X >= 0) &&
-                       //Check Bounds For Y
-                       (move.End.Y <= 7 && move.End.Y >= 0))
-                   )
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-              
-            }
-                return false;
+            return game.checkMove(currentPlayer.getIdentity(), move);
         }
-
     }
+
 }
