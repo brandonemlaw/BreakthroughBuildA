@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameCore
 {
-    enum identity {X,O}
+    public enum identity {X,O}
     class Player
     {
         private identity playerIdentity;
@@ -18,7 +18,15 @@ namespace GameCore
         }
         public char getIdentity()
         {
-            return (char)playerIdentity;
+            if (playerIdentity == identity.X)
+            {
+                return Config.XCHAR;
+            }
+            else
+            {
+                return Config.OCHAR;
+            }
+            //return (char)playerIdentity;
         }
     }
 }

@@ -15,12 +15,16 @@ namespace GameCore
        public COORD Begin = new COORD();
        public COORD End = new COORD();
 
+        public bool isXTurn;
+
+
         public void convertMove(COORD coord)
         {
             coord.X = 8 - row;
             coord.Y = col - 65;
         }
 
+ 
         public void getBeginMove()
         {
             Console.Write("\n");
