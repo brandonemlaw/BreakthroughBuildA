@@ -83,6 +83,11 @@ namespace GameCore
 
         }
 
+        public static Board getBoard()
+        {
+            return game.getBoard();
+        }
+
         public static bool checkCOORD(Player currentPlayer, Move move)
         {
             if (currentPlayer.getIdentity() == identity.X)
