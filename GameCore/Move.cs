@@ -17,8 +17,8 @@ namespace GameCore
 
         public void convertMove(COORD coord)
         {
-            coord.X = row;
-            coord.Y = col - 64;
+            coord.X = row - 1;
+            coord.Y = col - 64 - 1;
         }
 
         public void getFromUser(Player currentPlayer)

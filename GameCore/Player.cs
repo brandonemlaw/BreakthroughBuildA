@@ -23,7 +23,7 @@ namespace GameCore
             return playerIdentity;
         }
 
-        public Move getMove()
+        public virtual Move getMove()
         {
             Move result = new GameCore.Move();
             result.getFromUser(this);

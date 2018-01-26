@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace AI
 {
-    class Node
-    {
-        public GameCore.Board board;
 
-    }
 }

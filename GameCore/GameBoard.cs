@@ -91,7 +91,7 @@ namespace GameCore
         {
                         
             //get the piece value from the board, using its 0-7 reference system
-            char temp = board.getPieceAt(coord.X - 1, coord.Y - 1);
+            char temp = board.getPieceAt(coord.X, coord.Y);
 
             //Return the square type represented by the value
             if (temp == 'W')
@@ -117,7 +117,7 @@ namespace GameCore
             }
 
             //Try the move check on the Low Abstraction Board
-            return board.makeMove(isFirstsTurn, move.Begin.X - 1, move.Begin.Y - 1, move.End.X - 1, move.End.Y - 1, false);
+            return board.makeMove(isFirstsTurn, move.Begin.X, move.Begin.Y, move.End.X, move.End.Y, true);
         }
 
 
@@ -131,7 +131,7 @@ namespace GameCore
             }
 
             //Execute the move on the Low Abstraction Board
-            return board.makeMove(isFirstsTurn, move.Begin.X - 1, move.Begin.Y - 1, move.End.X - 1, move.End.Y - 1, true);
+            return board.makeMove(isFirstsTurn, move.Begin.X, move.Begin.Y, move.End.X, move.End.Y, false);
         }
 
     }

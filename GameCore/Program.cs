@@ -16,7 +16,7 @@ namespace GameCore
             //Define the players
             Player PlayerX = new Player();
             PlayerX.setPlayer(identity.X);
-            Player PlayerO = new Player();
+            Player PlayerO = new AIPlayer();
             PlayerO.setPlayer(identity.O);
             Player currentPlayer = null;
 
@@ -30,7 +30,7 @@ namespace GameCore
             COORD coord = new COORD();
             Move move = new Move();
 
-            beginGame(ref currentPlayer, ref game, ref move);
+            beginGame(currentPlayer.getIdentity(), ref PlayerX, ref PlayerO, ref game, ref move);
 
         }
 
@@ -60,25 +60,36 @@ namespace GameCore
             Console.Write("\n");
         }
         //Begin the game
-        private static void beginGame(ref Player currentPlayer, ref GameBoard Game,
+        private static void beginGame(identity firstID, ref Player xPlayer, ref Player oPlayer, ref GameBoard Game,
                                       ref Move move)
         {
+            Player currentPlayer;
+            if (firstID == identity.X)
+            {
+                currentPlayer = xPlayer;
+            }
+            else
+            {
+                currentPlayer = oPlayer;
+            }
+
             while (!Game.gameOver())
             {
-                Console.Write("AI Favors at " + global::AI.AICore.evaluate1(true, game.getBoard()) + "\n");
-                Console.Write(currentPlayer.getIdentity() + " to move...\n");
+               // Console.Write("AI Favors at " + global::AI.AICore.evaluate1(true, game.getBoard()) + "\n");
+                //Console.Write(currentPlayer.getIdentity() + " to move...\n");
                 move = currentPlayer.getMove();
 
                 Game.movePiece(currentPlayer.getIdentity(), move);
+                Console.Clear();
                 Game.printGameBoard();
 
                 if (currentPlayer.getIdentity() == identity.X)
                 {
-                    currentPlayer.setPlayer(identity.O);
+                    currentPlayer = oPlayer;
                 }
                 else
                 {
-                    currentPlayer.setPlayer(identity.X);
+                    currentPlayer = xPlayer;
                 }
             }
 
@@ -125,6 +136,11 @@ namespace GameCore
         public static bool checkMove(Player currentPlayer, Move move)
         {
             return game.checkMove(currentPlayer.getIdentity(), move);
+        }
+
+        public static identity getFirstPlayer()
+        {
+            return game.firstPlayer;
         }
     }
 
